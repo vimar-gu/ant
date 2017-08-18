@@ -8,13 +8,14 @@ using namespace std;
 class CCity
 {
 private:
-    int n;
+    int _num;
     pair<int, int> pos;
     map<int, pair<int, int>> city2pos;
 public:
     CCity();
-    double calcCity2CityDis(int city);
-    double calcCity2CityEta(int city);
+    double city2CityDis(int c1, int c2);
+    double city2CityEta(int c1, int c2);
+    int cityNum() {return _num;}
 };
 
 typedef Singleton<CCity> City;
