@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "city.h"
 #include <math.h>
 
@@ -17,4 +18,8 @@ double CCity::city2CityDis(int c1, int c2) {
 
 double CCity::city2CityEta(int c1, int c2) {
     return 1 / city2CityDis(c1, c2);
+}
+
+void CCity::fresh() {
+    emit needDraw();
 }

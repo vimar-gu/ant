@@ -1,10 +1,22 @@
 import QtQuick 2.7
+import QtQuick.Window 2.0
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.0
+import Client.Component 1.0 as Client
 
 ApplicationWindow {
+    id: root
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
+
+    Row {
+        Client.Field {
+            id: map
+            width: 640
+            height: 480
+        }
+    }
 }
