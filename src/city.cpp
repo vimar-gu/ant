@@ -1,6 +1,10 @@
 #include <QDebug>
 #include "city.h"
 #include <math.h>
+#include <sys/time.h>
+#include <iostream>
+#include <QTimer>
+using namespace std;
 
 CCity::CCity()
 {
@@ -9,8 +13,8 @@ CCity::CCity()
 
 double CCity::city2CityDis(int c1, int c2) {
     if (c1 != c2) {
-        double xDis = city2pos.at(c1).first - city2pos.at(c2).first;
-        double yDis = city2pos.at(c1).second - city2pos.at(c2).second;
+        double xDis = store[c1].x() - store[c2].x();
+        double yDis = store[c1].y() - store[c2].y();
         return sqrt(pow(xDis, 2) + pow(yDis, 2));
     }
     else return 0.001;
@@ -18,6 +22,12 @@ double CCity::city2CityDis(int c1, int c2) {
 
 double CCity::city2CityEta(int c1, int c2) {
     return 1 / city2CityDis(c1, c2);
+}
+
+void CCity::start() {
+    QTimer *timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(fresh()));
+    timer->start(1000);
 }
 
 void CCity::fresh() {

@@ -10,13 +10,15 @@ SOURCES += \
     src/main.cpp \
     src/city.cpp \
     src/field.cpp \
-    src/ant.cpp
+    src/ant.cpp \
+    src/interaction.cpp
 
 HEADERS += \
     src/city.h \
     src/field.h \
     src/singleton.hpp \
-    src/ant.h
+    src/ant.h \
+    src/interaction.h
 
 RESOURCES += \
     qml.qrc

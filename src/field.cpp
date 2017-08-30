@@ -1,7 +1,7 @@
 #include <QDebug>
 #include "field.h"
 namespace{
-    const static QColor COLOR_BLUE(19,49,137);
+    const static QColor COLOR_BLUE(210,210,255);
     const static QColor COLOR_TRANSBLUE(19,49,137,25);
     const static QColor COLOR_YELLOW(241,231,36);
     const static QColor COLOR_TRANSYELLOW(241,231,36,25);
@@ -22,7 +22,7 @@ Field::Field(QQuickItem *parent): QQuickPaintedItem(parent), pixmap(nullptr), pe
 
 void Field::draw() {
     qDebug() << "debug" << endl;
-    pixmap->fill(COLOR_DARKGREEN);
+    pixmap->fill(COLOR_BLUE);
     pixmapPainter.strokePath(painterPath, pen);
     fillField();
     this->update(area);
