@@ -4,11 +4,29 @@
 #include <sys/time.h>
 #include <iostream>
 #include <QTimer>
+#include <QTextStream>
+#include <QFile>
+#include <QString>
 using namespace std;
+QString DATA_DIR = "/home/ypbehere/Documents/srtp/ant1/Ant/data/data.txt";
 
 CCity::CCity()
 {
+    QFile data(DATA_DIR);
+    if (!data.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        cout << "Open failed." << endl;
+    }
 
+    QTextStream dataStream(&data);
+    while(!dataStream.atEnd())
+    {
+        static int count = 0;
+        dataStream >> store[count]._x >> store[count]._y;
+        qDebug() << count << store[count].x() << store[count].y();
+        count++;
+    }
+
+    data.close();
 }
 
 double CCity::city2CityDis(int c1, int c2) {

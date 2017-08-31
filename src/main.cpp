@@ -19,7 +19,5 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:src/qml/main.qml")));
 
-    City::instance()->fresh();
-
     return app.exec();
 }
