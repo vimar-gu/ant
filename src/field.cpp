@@ -2,15 +2,10 @@
 #include "field.h"
 namespace{
     const static QColor COLOR_BLUE(210,210,255);
-    const static QColor COLOR_TRANSBLUE(19,49,137,25);
     const static QColor COLOR_YELLOW(241,231,36);
-    const static QColor COLOR_TRANSYELLOW(241,231,36,25);
     const static QColor COLOR_PINK(255,63,149);
     const static QColor COLOR_GREEN(105,255,0);
     const static QColor COLOR_ORANGE(255,170,85);
-    const static QColor COLOR_TRANSORANGE(255,170,85,25);
-    const static QColor COLOR_DARKGREEN(Qt::darkGreen);
-    const static QColor COLOR_TRANSPARENT(Qt::transparent);
 }
 
 Field::Field(QQuickItem *parent): QQuickPaintedItem(parent), pixmap(nullptr), pen(Qt::white,1) {

@@ -23,10 +23,10 @@ struct CDriver {
 class CCity : public QObject {
     Q_OBJECT
 private:
-    const static int _MAX_CITY = 100;
+    const static int _MAX_STORE = 100;
     const static int _MAX_DRIVER = 100;
-    int _num;
-    CStore store[_MAX_CITY];
+    int _storeNum;
+    CStore store[_MAX_STORE];
     CDriver driver[_MAX_DRIVER];
 signals:
     void needDraw();
@@ -34,10 +34,10 @@ public slots:
     void fresh();
 public:
     CCity();
-    double city2CityDis(int c1, int c2);
-    double city2CityEta(int c1, int c2);
+    double store2StoreDis(int s1, int s2);
+    double store2StoreEta(int s1, int s2);
     void start();
-    int cityNum() {return _num;}
+    int storeNum() {return _storeNum;}
 };
 
 typedef Singleton<CCity> City;

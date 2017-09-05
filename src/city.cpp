@@ -18,28 +18,30 @@ CCity::CCity()
     }
 
     QTextStream dataStream(&data);
+    int storeCount = 0;
     while(!dataStream.atEnd())
     {
-        static int count = 0;
-        dataStream >> store[count]._x >> store[count]._y;
-        qDebug() << count << store[count].x() << store[count].y();
-        count++;
+        dataStream >> store[storeCount]._x >> store[storeCount]._y;
+        qDebug() << storeCount << store[storeCount].x() << store[storeCount].y();
+        storeCount++;
     }
+    _storeNum = storeCount--;
+    qDebug() << store2StoreDis(0, 1);
 
     data.close();
 }
 
-double CCity::city2CityDis(int c1, int c2) {
-    if (c1 != c2) {
-        double xDis = store[c1].x() - store[c2].x();
-        double yDis = store[c1].y() - store[c2].y();
+double CCity::store2StoreDis(int s1, int s2) {
+    if (s1 != s2) {
+        double xDis = store[s1].x() - store[s2].x();
+        double yDis = store[s1].y() - store[s2].y();
         return sqrt(pow(xDis, 2) + pow(yDis, 2));
     }
     else return 0.001;
 }
 
-double CCity::city2CityEta(int c1, int c2) {
-    return 1 / city2CityDis(c1, c2);
+double CCity::store2StoreEta(int s1, int s2) {
+    return 1 / store2StoreDis(s1, s2);
 }
 
 void CCity::start() {
