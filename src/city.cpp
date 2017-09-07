@@ -25,7 +25,7 @@ CCity::CCity()
         qDebug() << storeCount << store[storeCount].x() << store[storeCount].y();
         storeCount++;
     }
-    _storeNum = storeCount--;
+    _storeNum = storeCount - 1;
     qDebug() << store2StoreDis(0, 1);
 
     data.close();
@@ -51,5 +51,8 @@ void CCity::start() {
 }
 
 void CCity::fresh() {
+    Ant tempAnt(10);
+    tempAnt.dealWithData();
+
     emit needDraw();
 }

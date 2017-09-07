@@ -4,6 +4,7 @@
 #include <map>
 #include <QObject>
 #include "singleton.hpp"
+#include "ant.h"
 using namespace std;
 
 struct CStore {

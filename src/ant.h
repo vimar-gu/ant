@@ -8,14 +8,23 @@ using namespace std;
 class Ant
 {
 private:
-    int _storeNum = City::instance()->storeNum();
-    int _routeNum = _storeNum*(_storeNum - 1) / 2;
+    int _storeNum;
+    int _routeNum;
     vector<int> _store2StoreTau;
     int _antNum;
 public:
     Ant(int antNum);
     double dealWithData();
-    int normalize(s1, s2);
+    int normalize(int s1, int s2);
+};
+
+struct TempList {
+    TempList(int n) {
+        for (int i = 0; i < n;i++) {
+            list.push_back(i);
+        }
+    }
+    vector<int> list;
 };
 
 #endif // PATH_H
