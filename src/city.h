@@ -27,8 +27,9 @@ private:
     const static int _MAX_STORE = 100;
     const static int _MAX_DRIVER = 100;
     int _storeNum;
-    CStore store[_MAX_STORE];
-    CDriver driver[_MAX_DRIVER];
+    int _driverNum = 10; //waiting to be changed with regex
+    CStore _store[_MAX_STORE];
+    CDriver _driver[_MAX_DRIVER];
 signals:
     void needDraw();
 public slots:
@@ -37,8 +38,11 @@ public:
     CCity();
     double store2StoreDis(int s1, int s2);
     double store2StoreEta(int s1, int s2);
+    CStore& store(int n) {return _store[n];}
+    CDriver& driver(int n) {return _driver[n];}
     void start();
     int storeNum() {return _storeNum;}
+    int driverNum() {return _driverNum;}
 };
 
 typedef Singleton<CCity> City;

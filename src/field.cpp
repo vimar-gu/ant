@@ -27,6 +27,25 @@ void Field::paint(QPainter* painter){
     painter->drawPixmap(area,*pixmap);
 }
 
-void Field::fillField() {
+void Field::paintStore(const QColor &color, qreal x, qreal y) {
+    static float radius = 5;
+    pixmapPainter.setBrush(QBrush(color));
+    pixmapPainter.setPen(Qt::NoPen);
+    pixmapPainter.drawEllipse(x * 20 - radius, y * 20 - radius,2 * radius, 2 * radius);
+}
 
+void Field::paintDriver(const QColor &color, qreal x, qreal y) {
+    static float radius = 5;
+    pixmapPainter.setBrush(QBrush(color));
+    pixmapPainter.setPen(Qt::NoPen);
+    pixmapPainter.drawEllipse(x * 20 - radius, y * 20 - radius,2 * radius, 2 * radius);
+}
+
+void Field::fillField() {
+    for (int i = 0; i < City::instance()->storeNum(); i++) {
+        paintStore(COLOR_PINK, City::instance()->store(i).x(), City::instance()->store(i).y());
+    }
+    for (int i = 0; i < City::instance()->driverNum(); i++) {
+        paintDriver(COLOR_ORANGE, City::instance()->driver(i).x(), City::instance()->driver(i).y());
+    }
 }

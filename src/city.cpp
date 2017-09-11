@@ -21,20 +21,23 @@ CCity::CCity()
     int storeCount = 0;
     while(!dataStream.atEnd())
     {
-        dataStream >> store[storeCount]._x >> store[storeCount]._y;
-        qDebug() << storeCount << store[storeCount].x() << store[storeCount].y();
+        dataStream >> _store[storeCount]._x >> _store[storeCount]._y;
         storeCount++;
     }
     _storeNum = storeCount - 1;
-    qDebug() << store2StoreDis(0, 1);
+
+    for (int i = 0; i < _driverNum; i++) {
+        _driver[i]._x = 5;
+        _driver[i]._y = 5;
+    }
 
     data.close();
 }
 
 double CCity::store2StoreDis(int s1, int s2) {
     if (s1 != s2) {
-        double xDis = store[s1].x() - store[s2].x();
-        double yDis = store[s1].y() - store[s2].y();
+        double xDis = _store[s1].x() - _store[s2].x();
+        double yDis = _store[s1].y() - _store[s2].y();
         return sqrt(pow(xDis, 2) + pow(yDis, 2));
     }
     else return 0.001;
