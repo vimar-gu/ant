@@ -9,15 +9,18 @@ class Ant
 {
 private:
     int _maxLoop;
+    int _antNum;
     int _storeNum;
     int _routeNum;
-    vector<int> _store2StoreTau;
-    int _antNum;
+    double _enFactor = 0.5;
+    double _deFactor = 0.5;
+    vector<double> _store2StoreTau;
+    vector<int> _bestRouteRec;
 public:
     Ant(int antNum, int loopNum);
+    ~Ant();
     double dealWithData();
     int normalize(int s1, int s2);
-    double store2StoreTau(int s1, int s2);
 };
 
 struct TempList {
