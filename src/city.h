@@ -14,7 +14,7 @@ struct CStore {
     double y() {return _y;}
 };
 
-struct CDriver {
+struct CDriver {  //>>TO DO
     double _x;
     double _y;
     double x() {return _x;}
