@@ -55,7 +55,7 @@ void CCity::start() {
 
 void CCity::fresh() {
     Ant tempAnt(10, 1);
-    tempAnt.dealWithData();
+    double tmp = tempAnt.dealWithData();
 
     emit needDraw();
 }
