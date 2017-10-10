@@ -27,7 +27,7 @@ private:
     const static int _MAX_STORE = 100;
     const static int _MAX_DRIVER = 100;
     int _storeNum;
-    int _driverNum = 10; //waiting to be changed with regex
+    int _driverNum = 1; //waiting to be changed with regex
     CStore _store[_MAX_STORE];
     CDriver _driver[_MAX_DRIVER];
 signals:
