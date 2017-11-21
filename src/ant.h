@@ -16,10 +16,11 @@ private:
     double _deFactor = 0.5;
     vector<double> _store2StoreTau;
     vector<int> _bestRouteRec;
+    int AllowedCity[];
 public:
     Ant(int antNum, int loopNum);
     ~Ant();
-    double dealWithData();
+    vector<int> dealWithData();
     int normalize(int s1, int s2);
 };
 

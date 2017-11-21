@@ -28,13 +28,13 @@ int Ant::normalize(int s1, int s2) {     //turn a pair of store num into the num
     else return -1;
 }
 
-double Ant::dealWithData() {
+vector<int> Ant::dealWithData() {
     vector<vector<int>> routeRec;
 
     //input the info of stores
     vector<int> randPosList;
     vector<int>::iterator it;
-    int turn = ceil(_antNum / _storeNum);
+    int turn = (_antNum / _storeNum) - (int)(_antNum / _storeNum) != 0?(int)(_antNum / _storeNum)+ 1 :(int)(_antNum / _storeNum);
     for (int i = 0; i < turn; i++) {
         TempList tempList(_storeNum);
         for (int j = 0; j < _storeNum; j++) {
@@ -64,15 +64,17 @@ double Ant::dealWithData() {
                     it = find(waitList.begin(), waitList.end(), visited[j]);
                     waitList.erase(it);
                 }
-                qDebug() << waitList;
+                //qDebug() << waitList;
 
                 //calculate the probability of every unvisited store
                 vector<double> probability;
                 probability.resize(waitList.size());
                 vector<int> currentPos = routeRec[i - 1];
                 for (unsigned int k = 0; k < probability.size(); k++) {
-                    probability[k] = (_store2StoreTau[normalize(currentPos[j], waitList[k])]) * 0.5
+                    if(AllowedCity[k]==1){
+                        probability[k] = (_store2StoreTau[normalize(currentPos[j], waitList[k])]) * 0.5
                             + (City::instance()->store2StoreEta(currentPos[j], waitList[k])) * 0.5; //currently
+                    }
                 }
 
                 int maxPos = distance(probability.begin(), max_element(probability.begin(), probability.end()));
@@ -111,5 +113,5 @@ double Ant::dealWithData() {
             _store2StoreTau[i] = (1 - _deFactor) * _store2StoreTau[i] + deltaTau[i];
         }
     }
-    return -1;
+    return _bestRouteRec;
 }

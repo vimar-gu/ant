@@ -8,7 +8,7 @@
 #include <QFile>
 #include <QString>
 using namespace std;
-QString DATA_DIR = "/home/ypbehere/Documents/srtp/ant1/Ant/data/data.txt";
+QString DATA_DIR = "/Users/lizhifei/ant/data/data.txt";
 
 CCity::CCity()
 {
@@ -27,8 +27,9 @@ CCity::CCity()
     _storeNum = storeCount - 1;
 
     for (int i = 0; i < _driverNum; i++) {
-        _driver[i]._x = 5;
-        _driver[i]._y = 5;
+        _driver[i]._x = _store[0].x();
+        _driver[i]._y = _store[0].y();
+        _driver[i].tempPos = 0;
     }
 
     data.close();
@@ -55,7 +56,27 @@ void CCity::start() {
 
 void CCity::fresh() {
     Ant tempAnt(10, 1);
-    double tmp = tempAnt.dealWithData();
+    vector<int> tmp = tempAnt.dealWithData();
+    int tmpCnt = tmp.at(_driver[0].tempPos);
+    for(int i = 0;i<_storeNum;i++){
+        tmp.push_back(i);
+    }
+    vector<int>::iterator it;
+    for(it = tmp.begin();*it!=tmpCnt;it++);
+    int front;
+    int next;
+    front = *(it--);
+    next = *(it++);
+    double frontDis = store2StoreDis(_driver[0].tempPos, front);
+    double nextDis = store2StoreDis(_driver[0].tempPos, next);
+    int finalDicision = frontDis > nextDis?next:front;
+    _store[_driver[0].tempPos]._passed = true;
+    _driver[0]._x = _store[finalDicision].x();
+    _driver[0]._y = _store[finalDicision].y();
+    _driver[0].tempPos = finalDicision;
+//    _storeNum--;
+    it = tmp.erase(it);
+    _storeNum--;
 
     emit needDraw();
 }

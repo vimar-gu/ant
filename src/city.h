@@ -10,6 +10,7 @@ using namespace std;
 struct CStore {
     double _x;
     double _y;
+    bool _passed = false;
     double x() {return _x;}
     double y() {return _y;}
 };
@@ -17,6 +18,7 @@ struct CStore {
 struct CDriver {  //>>TO DO
     double _x;
     double _y;
+    int tempPos;
     double x() {return _x;}
     double y() {return _y;}
 };
