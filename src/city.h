@@ -7,20 +7,24 @@
 #include "ant.h"
 using namespace std;
 
-struct CStore {
+struct pos {
     double _x;
     double _y;
-    bool _passed = false;
     double x() {return _x;}
     double y() {return _y;}
 };
 
-struct CDriver {  //>>TO DO
-    double _x;
-    double _y;
+struct CStore {
+    pos _pos;
+    double x() {return _pos.x();}
+    double y() {return _pos.y();}
+};
+
+struct CDriver {
+    pos _pos;
     int tempPos;
-    double x() {return _x;}
-    double y() {return _y;}
+    double x() {return _pos.x();}
+    double y() {return _pos.y();}
 };
 
 class CCity : public QObject {
@@ -43,6 +47,7 @@ public:
     CStore& store(int n) {return _store[n];}
     CDriver& driver(int n) {return _driver[n];}
     void start();
+    void clearStore(int i);
     int storeNum() {return _storeNum;}
     int driverNum() {return _driverNum;}
 };

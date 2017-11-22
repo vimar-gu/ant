@@ -5,7 +5,6 @@
 Ant::Ant(int antNum, int loopNum) {
     _storeNum = City::instance()->storeNum();
     _maxLoop = loopNum;
-    qDebug() << _storeNum;
     _routeNum = _storeNum*(_storeNum - 1) / 2;
     this->_antNum = antNum;
     _store2StoreTau.resize(_routeNum);
@@ -34,7 +33,9 @@ vector<int> Ant::dealWithData() {
     //input the info of stores
     vector<int> randPosList;
     vector<int>::iterator it;
-    int turn = (_antNum / _storeNum) - (int)(_antNum / _storeNum) != 0?(int)(_antNum / _storeNum)+ 1 :(int)(_antNum / _storeNum);
+    int turn = (_antNum / _storeNum) - (int)(_antNum / _storeNum) != 0 ?
+                (int)(_antNum / _storeNum) + 1 :(int)(_antNum / _storeNum);
+    _antNum = turn * _storeNum;
     for (int i = 0; i < turn; i++) {
         TempList tempList(_storeNum);
         for (int j = 0; j < _storeNum; j++) {
@@ -45,7 +46,6 @@ vector<int> Ant::dealWithData() {
         }
     }
     routeRec.push_back(randPosList);
-    qDebug() << routeRec.size();
 
     //start main loop
     for (int cnt = 0; cnt < _maxLoop; cnt++) {
@@ -64,17 +64,14 @@ vector<int> Ant::dealWithData() {
                     it = find(waitList.begin(), waitList.end(), visited[j]);
                     waitList.erase(it);
                 }
-                //qDebug() << waitList;
 
                 //calculate the probability of every unvisited store
                 vector<double> probability;
                 probability.resize(waitList.size());
                 vector<int> currentPos = routeRec[i - 1];
                 for (unsigned int k = 0; k < probability.size(); k++) {
-                    if(AllowedCity[k]==1){
-                        probability[k] = (_store2StoreTau[normalize(currentPos[j], waitList[k])]) * 0.5
-                            + (City::instance()->store2StoreEta(currentPos[j], waitList[k])) * 0.5; //currently
-                    }
+                    probability[k] = (_store2StoreTau[normalize(currentPos[j], waitList[k])]) * 0.5
+                        + (City::instance()->store2StoreEta(currentPos[j], waitList[k])) * 0.5; //currently
                 }
 
                 int maxPos = distance(probability.begin(), max_element(probability.begin(), probability.end()));

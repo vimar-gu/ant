@@ -16,7 +16,6 @@ Field::Field(QQuickItem *parent): QQuickPaintedItem(parent), pixmap(nullptr), pe
 }
 
 void Field::draw() {
-    qDebug() << "debug" << endl;
     pixmap->fill(COLOR_BLUE);
     pixmapPainter.strokePath(painterPath, pen);
     fillField();
@@ -31,14 +30,14 @@ void Field::paintStore(const QColor &color, qreal x, qreal y) {
     static float radius = 5;
     pixmapPainter.setBrush(QBrush(color));
     pixmapPainter.setPen(Qt::NoPen);
-    pixmapPainter.drawEllipse(x * 20 - radius, y * 20 - radius,2 * radius, 2 * radius);
+    pixmapPainter.drawEllipse(x * 50 - radius, y * 50 - radius,2 * radius, 2 * radius);
 }
 
 void Field::paintDriver(const QColor &color, qreal x, qreal y) {
     static float radius = 5;
     pixmapPainter.setBrush(QBrush(color));
     pixmapPainter.setPen(Qt::NoPen);
-    pixmapPainter.drawEllipse(x * 20 - radius, y * 20 - radius,2 * radius, 2 * radius);
+    pixmapPainter.drawEllipse(x * 50 - radius, y * 50 - radius,2 * radius, 2 * radius);
 }
 
 void Field::fillField() {
