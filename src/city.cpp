@@ -73,10 +73,11 @@ void CCity::fresh() {
     qDebug() << _driver[0].tempPos;
     clearStore(_driver[0].tempPos);
     _storeNum--;
-    _driver[0].tempPos = finalDicision;
+    _driver[0].tempPos = finalDicision > _driver[0].tempPos ? finalDicision - 1 : finalDicision;
 }
 
 void CCity::clearStore(int i) {
+    if (i == _storeNum) return;
     while (i + 1 < _storeNum) {
         _store[i]._pos._x = _store[i+1].x();
         _store[i]._pos._y = _store[i+1].y();
