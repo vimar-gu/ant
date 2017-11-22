@@ -57,23 +57,25 @@ void CCity::start() {
 void CCity::fresh() {
     emit needDraw();
 
-    Ant tempAnt(10, 1);
-    vector<int> tmp = tempAnt.dealWithData();
+    for (int tmpCnt = 0; tmpCnt < _driverNum; tmpCnt++) {
+        Ant tempAnt(100, 1);
+        vector<int> tmp = tempAnt.dealWithData();
 
-    int i = 0;
-    while (tmp[i] != _driver[0].tempPos) i++;
-    int front = i == 0 ? tmp[_storeNum - 1] : tmp[i-1];
-    int next = i == _storeNum - 1 ? tmp[0] : tmp[i+1];
-    double frontDis = store2StoreDis(_driver[0].tempPos, front);
-    double nextDis = store2StoreDis(_driver[0].tempPos, next);
-    int finalDicision = frontDis > nextDis ? next : front;
+        int i = 0;
+        while (tmp[i] != _driver[tmpCnt].tempPos) i++;
+        int front = i == 0 ? tmp[_storeNum - 1] : tmp[i-1];
+        int next = i == _storeNum - 1 ? tmp[0] : tmp[i+1];
+        double frontDis = store2StoreDis(_driver[tmpCnt].tempPos, front);
+        double nextDis = store2StoreDis(_driver[tmpCnt].tempPos, next);
+        int finalDicision = frontDis > nextDis ? next : front;
 
-    _driver[0]._pos._x = _store[finalDicision].x();
-    _driver[0]._pos._y = _store[finalDicision].y();
-    qDebug() << _driver[0].tempPos;
-    clearStore(_driver[0].tempPos);
-    _storeNum--;
-    _driver[0].tempPos = finalDicision > _driver[0].tempPos ? finalDicision - 1 : finalDicision;
+        _driver[tmpCnt]._pos._x = _store[finalDicision].x();
+        _driver[tmpCnt]._pos._y = _store[finalDicision].y();
+        qDebug() << _driver[tmpCnt].tempPos;
+        clearStore(_driver[tmpCnt].tempPos);
+        _storeNum--;
+        _driver[tmpCnt].tempPos = finalDicision > _driver[tmpCnt].tempPos ? finalDicision - 1 : finalDicision;
+    }
 }
 
 void CCity::clearStore(int i) {
